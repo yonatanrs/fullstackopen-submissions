@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "json-server -p 3001 db.json"
+  },
+  "dependencies": {
+    "axios": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "json-server": "latest",
+    "vite": "latest"
+  }
+}
