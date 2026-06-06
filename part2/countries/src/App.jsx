@@ -24,6 +24,10 @@ const CountryList = ({ countries, onShow }) => {
 }
 
 const Languages = ({ languages }) => {
+  if (!languages) {
+    return null
+  }
+
   return (
     <ul>
       {Object.values(languages).map(language =>
@@ -35,12 +39,14 @@ const Languages = ({ languages }) => {
 
 const Weather = ({ country }) => {
   const [weather, setWeather] = useState(null)
+  const [weatherError, setWeatherError] = useState(null)
 
   const capital = country.capital?.[0]
   const apiKey = import.meta.env.VITE_SOME_KEY
 
   useEffect(() => {
     setWeather(null)
+    setWeatherError(null)
 
     if (!capital || !apiKey) {
       return
@@ -50,6 +56,9 @@ const Weather = ({ country }) => {
       .getWeather(capital, apiKey)
       .then(data => {
         setWeather(data)
+      })
+      .catch(() => {
+        setWeatherError('Weather data could not be loaded')
       })
   }, [capital, apiKey])
 
@@ -62,6 +71,15 @@ const Weather = ({ country }) => {
       <div>
         <h2>Weather in {capital}</h2>
         <p>Weather API key is missing. Set VITE_SOME_KEY before running the app.</p>
+      </div>
+    )
+  }
+
+  if (weatherError) {
+    return (
+      <div>
+        <h2>Weather in {capital}</h2>
+        <p>{weatherError}</p>
       </div>
     )
   }
