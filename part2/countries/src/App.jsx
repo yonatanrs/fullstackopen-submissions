@@ -122,6 +122,7 @@ const CountryDetails = ({ country }) => {
       <Languages languages={country.languages} />
 
       <img
+        className="flag"
         src={country.flags.png}
         alt={country.flags.alt ?? `Flag of ${country.name.common}`}
         width="150"
